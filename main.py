@@ -23,13 +23,15 @@ class Board():
 
     def spawn_block(self, block_arr):
         if len(block_arr) > 1: # Other than "I" type
-            print(self._status[0])
+            self._status[0][3:6] = block_arr[0]
+            self._status[1][3:6] = block_arr[1]
+
         else:
 
-            self._status[0][0:4] = block_arr[0]
+            self._status[0][3:7] = block_arr[0]
 
 
-    def move_block():
+    def move_block_down():
         pass
         
 if __name__ == "__main__":
