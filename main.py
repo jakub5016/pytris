@@ -40,8 +40,21 @@ class Board():
 
 
     def move_block_down(self):
+        self.clear_last_elem()
         self.elements[-1].position[0] += 1
         self.refresh_position()
+
+    def clear_last_elem(self):
+        block = self.elements[-1]
+
+        if block._type != "I":
+            self._status[block.position[0]][block.position[1]:block.position[1]+3] = 0
+            self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] = 0
+
+        else:
+
+            self._status[block.position[0]][block.position[1]:7] = 0
+
 
     def refresh_position(self):
         block = self.elements[-1]
@@ -60,6 +73,15 @@ if __name__ == "__main__":
     board = Board()
     T_block = Block("T")
     board.spawn_block(T_block)
+    
+    board.move_block_down()
+    print(board._status)
+    print(board.elements[-1].position)
+
+    board.move_block_down()
+    print(board._status)
+    print(board.elements[-1].position)
+    
     board.move_block_down()
     print(board._status)
     print(board.elements[-1].position)
