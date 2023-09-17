@@ -70,18 +70,4 @@ class Board():
 
         
 if __name__ == "__main__":
-    board = Board()
-    T_block = Block("T")
-    board.spawn_block(T_block)
-    
-    board.move_block_down()
-    print(board._status)
-    print(board.elements[-1].position)
-
-    board.move_block_down()
-    print(board._status)
-    print(board.elements[-1].position)
-    
-    board.move_block_down()
-    print(board._status)
-    print(board.elements[-1].position)
+    pass
