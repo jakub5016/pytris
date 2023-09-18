@@ -70,13 +70,15 @@ class Board():
 
     def move_left(self):
         self.clear_last_elem()
-        self.elements[-1].position[1] -= 1
-        self.refresh_position()
+        if (self.elements[-1].position[1] - 1) >= 0: 
+            self.elements[-1].position[1] -= 1
+            self.refresh_position()
         
     def move_right(self):
         self.clear_last_elem()
-        self.elements[-1].position[1] += 1
-        self.refresh_position()
+        if (self.elements[-1].position[1] + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])): 
+            self.elements[-1].position[1] += 1
+            self.refresh_position()
 
 if __name__ == "__main__":
     pass

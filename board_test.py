@@ -65,3 +65,10 @@ def test_move_left():
     correct = all(second_status)
 
     assert correct and T_block.position == [1,4]
+
+    board.move_right()
+    board.move_right()
+    board.move_right()
+    board.move_right()
+
+    assert correct and T_block.position == [1,7]
