@@ -68,6 +68,15 @@ class Board():
 
             self._status[block.position[0]][block.position[1]:7] = block_arr[0]
 
+    def move_left(self):
+        self.clear_last_elem()
+        self.elements[-1].position[1] -= 1
+        self.refresh_position()
         
+    def move_right(self):
+        self.clear_last_elem()
+        self.elements[-1].position[1] += 1
+        self.refresh_position()
+
 if __name__ == "__main__":
     pass
