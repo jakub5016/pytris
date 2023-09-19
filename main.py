@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 TETROMINO = {"I": [[0,0,0,0],[1,1,1,1]], 
              "J": [[1,0,0,0],[1,1,1,0]],
@@ -41,8 +42,14 @@ class Board():
 
     def move_block_down(self):
         self.clear_last_elem()
-        self.elements[-1].position[0] += 1
-        self.refresh_position()
+        if (self.elements[-1].position[0] + 1) <= (len(self._status) - len(self.elements[-1].position) -1): 
+            self.elements[-1].position[0] += 1
+            self.refresh_position()
+
+            return True
+
+        return False
+
 
     def clear_last_elem(self):
         block = self.elements[-1]
@@ -81,4 +88,22 @@ class Board():
             self.refresh_position()
 
 if __name__ == "__main__":
-    pass
+    board = Board()
+    T_block = Block("T")
+    board.spawn_block(T_block)
+
+    while True:
+        print(board._status)
+        move = input()
+
+        os.system('clear') # Fix later, works only for Linux 
+
+        if move == "d":
+            board.move_right()
+        
+        elif move == "a":
+            board.move_left()
+
+        if not board.move_block_down():
+            break
+        
