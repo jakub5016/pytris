@@ -41,10 +41,23 @@ class Board():
 
 
     def move_block_down(self):
-        self.clear_last_elem()
-        if (self.elements[-1].position[0] + 1) <= (len(self._status) - len(self.elements[-1].position) -1): 
+        if (self.elements[-1].position[0] + 1) <= (len(self._status) - len(self.elements[-1].position)): # Assertion from hitting floor
+            self.clear_last_elem()
             self.elements[-1].position[0] += 1
             self.refresh_position()
+
+            is_touched=False
+            for i in self._status:
+                for j in i:
+                    if j >= 2:
+                        is_touched=True
+                        self.clear_last_elem()
+                        self.elements[-1].position[0] -= 1
+                        self.refresh_position()
+
+            # if is_touched:
+            #     for i in self.elements:
+            #         self.refresh_position(i)
 
             return True
 
@@ -63,27 +76,28 @@ class Board():
             self._status[block.position[0]][block.position[1]:7] = 0
 
 
-    def refresh_position(self):
-        block = self.elements[-1]
+    def refresh_position(self, block=None):
+        if block == None:
+            block = self.elements[-1]
         block_arr = block.representation
 
         if block._type != "I":
-            self._status[block.position[0]][block.position[1]:block.position[1]+3] = block_arr[0]
-            self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] = block_arr[1]
+            self._status[block.position[0]][block.position[1]:block.position[1]+3] += block_arr[0]
+            self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] += block_arr[1]
 
         else:
 
-            self._status[block.position[0]][block.position[1]:7] = block_arr[0]
+            self._status[block.position[0]][block.position[1]:7] += block_arr[0]
 
     def move_left(self):
         self.clear_last_elem()
-        if (self.elements[-1].position[1] - 1) >= 0: 
+        if (self.elements[-1].position[1] - 1) >= 0:  # Assertion from hitting wall
             self.elements[-1].position[1] -= 1
             self.refresh_position()
         
     def move_right(self):
         self.clear_last_elem()
-        if (self.elements[-1].position[1] + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])): 
+        if (self.elements[-1].position[1] + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])):  # Assertion from hitting wall
             self.elements[-1].position[1] += 1
             self.refresh_position()
 
@@ -105,5 +119,5 @@ if __name__ == "__main__":
             board.move_left()
 
         if not board.move_block_down():
-            break
+            board.spawn_block(Block("T"))
         
