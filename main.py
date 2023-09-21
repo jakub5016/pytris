@@ -42,7 +42,7 @@ class Board():
 
     def move_block_down(self):
         if (self.elements[-1].position[0] + 1) <= (len(self._status) - len(self.elements[-1].position)): # Assertion from hitting floor
-            self.clear_last_elem()
+            self.clear_elem()
             self.elements[-1].position[0] += 1
             self.refresh_position()
 
@@ -51,21 +51,24 @@ class Board():
                 for j in i:
                     if j >= 2:
                         is_touched=True
-                        self.clear_last_elem()
+                        self.clear_elem()
                         self.elements[-1].position[0] -= 1
                         self.refresh_position()
 
-            # if is_touched:
-            #     for i in self.elements:
-            #         self.refresh_position(i)
+            if is_touched:
+                elem_without_last = self.elements[0:len(self.elements)-1]
+                for i in elem_without_last:
+                    self.clear_elem(i)
+                    self.refresh_position(i)
 
-            return True
+            return not is_touched
 
         return False
 
 
-    def clear_last_elem(self):
-        block = self.elements[-1]
+    def clear_elem(self, block=None):
+        if block == None:
+            block = self.elements[-1]
 
         if block._type != "I":
             self._status[block.position[0]][block.position[1]:block.position[1]+3] = 0
@@ -90,13 +93,13 @@ class Board():
             self._status[block.position[0]][block.position[1]:7] += block_arr[0]
 
     def move_left(self):
-        self.clear_last_elem()
+        self.clear_elem()
         if (self.elements[-1].position[1] - 1) >= 0:  # Assertion from hitting wall
             self.elements[-1].position[1] -= 1
             self.refresh_position()
         
     def move_right(self):
-        self.clear_last_elem()
+        self.clear_elem()
         if (self.elements[-1].position[1] + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])):  # Assertion from hitting wall
             self.elements[-1].position[1] += 1
             self.refresh_position()
