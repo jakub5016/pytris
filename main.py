@@ -56,10 +56,9 @@ class Board():
                         self.refresh_position()
 
             if is_touched:
-                elem_without_last = self.elements[0:len(self.elements)-1]
-                for i in elem_without_last:
+                for i in self.elements:
                     self.clear_elem(i)
-                    self.refresh_position(i)
+                    self.refresh_position(i,addition=False)
 
             return not is_touched
 
@@ -79,18 +78,27 @@ class Board():
             self._status[block.position[0]][block.position[1]:7] = 0
 
 
-    def refresh_position(self, block=None):
+    def refresh_position(self, block=None, addition=True):
         if block == None:
             block = self.elements[-1]
         block_arr = block.representation
 
-        if block._type != "I":
-            self._status[block.position[0]][block.position[1]:block.position[1]+3] += block_arr[0]
-            self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] += block_arr[1]
+        if addition:
+            if block._type != "I":
+                self._status[block.position[0]][block.position[1]:block.position[1]+3] += block_arr[0]
+                self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] += block_arr[1]
 
+            else:
+
+                self._status[block.position[0]][block.position[1]:7] += block_arr[0]
         else:
+            if block._type != "I":
+                self._status[block.position[0]][block.position[1]:block.position[1]+3] = block_arr[0]
+                self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] = block_arr[1]
 
-            self._status[block.position[0]][block.position[1]:7] += block_arr[0]
+            else:
+
+                self._status[block.position[0]][block.position[1]:7] = block_arr[0]
 
     def move_left(self):
         self.clear_elem()
