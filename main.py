@@ -75,7 +75,7 @@ class Board():
 
         else:
 
-            self._status[block.position[0]][block.position[1]:7] = 0
+             self._status[block.position[0]][block.position[1]:block.position[1]+4] = 0
 
 
     def refresh_position(self, block=None, addition=True):
@@ -89,8 +89,9 @@ class Board():
                 self._status[block.position[0] + 1][block.position[1]:block.position[1]+3] += block_arr[1]
 
             else:
+                print(self._status[block.position[0]][block.position[1]:block.position[1]+4], block.position[0])
 
-                self._status[block.position[0]][block.position[1]:7] += block_arr[0]
+                self._status[block.position[0]][block.position[1]:block.position[1]+4] += block_arr[0]
         else:
             if block._type != "I":
                 self._status[block.position[0]][block.position[1]:block.position[1]+3] = block_arr[0]
@@ -98,7 +99,7 @@ class Board():
 
             else:
 
-                self._status[block.position[0]][block.position[1]:7] = block_arr[0]
+                self._status[block.position[0]][block.position[1]:block.position[1]+4] = block_arr[0]
 
     def move_left(self):
         self.clear_elem()
@@ -114,7 +115,7 @@ class Board():
 
 if __name__ == "__main__":
     board = Board()
-    T_block = Block("T")
+    T_block = Block("I")
     board.spawn_block(T_block)
 
     while True:
@@ -130,5 +131,5 @@ if __name__ == "__main__":
             board.move_left()
 
         if not board.move_block_down():
-            board.spawn_block(Block("T"))
+            board.spawn_block(Block("I"))
         
