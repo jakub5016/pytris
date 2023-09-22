@@ -1,5 +1,6 @@
 import numpy as np
 import os
+from random import choice
 
 TETROMINO = {"I": [[0,0,0,0],[1,1,1,1]], 
              "J": [[1,0,0,0],[1,1,1,0]],
@@ -131,5 +132,6 @@ if __name__ == "__main__":
             board.move_left()
 
         if not board.move_block_down():
-            board.spawn_block(Block("I"))
+            random_key = choice(list(TETROMINO.keys())) 
+            board.spawn_block(Block(random_key))
         
