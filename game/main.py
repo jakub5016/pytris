@@ -11,6 +11,10 @@ TETROMINO = {"I": [[0,0,0,0],[1,1,1,1]],
              "Z": [[1,1,0,0],[0,1,1,0]]} # Types of blocks in Tetris represented by 2x4 np array 
 
 class Block():
+    """
+    Definition for blocks used in game. All of the blocks are represented by Tetromino.
+    :param type: this variable is used to  
+    """
     def __init__(self, type="I"):
         self._type = type
 
