@@ -51,7 +51,9 @@ class Board():
 
 
     def move_block_down(self):
-        if (self.elements[-1].x + self.elements[-1].height) <= (len(self._status) - len(self.elements[-1].position)): # Assertion from hitting floor
+        last_elem = self.elements[-1]
+
+        if (last_elem.x + last_elem.height) <= (len(self._status) - len(last_elem.position)): # Assertion from hitting floor
             self.clear_elem()
             self.elements[-1].x += 1
             self.refresh_position()
