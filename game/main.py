@@ -4,7 +4,7 @@ from random import choice
 
 TETROMINO = {"I": [[0,0,0,0],[1,1,1,1]], 
              "J": [[1,0,0,0],[1,1,1,0]],
-             "L": [[0,0,0,1],[1,1,1,0]],
+             "L": [[0,0,1,0],[1,1,1,0]],
              "O": [[0,1,1,0],[0,1,1,0]],
              "S": [[0,1,1,0],[1,1,0,0]],
              "T": [[0,1,0,0],[1,1,1,0]],
@@ -23,7 +23,7 @@ class Block():
         # we simply use only one dimensional array.
         # Also we want to shrik the array for 2x3 type of blocks. 
         if type != "I":
-            self.representation = [np.array(TETROMINO[type][0][0:3]), np.array(TETROMINO[type][1][0:3])]
+            self.representation =[np.array(TETROMINO[type][0][0:3]), np.array(TETROMINO[type][1][0:3])]
 
         else:
             self.representation = [np.array(TETROMINO[type][1])]
@@ -33,10 +33,10 @@ class Block():
 
         self.x=self.position[0]
         self.y=self.position[1]
-
-    def update_position(self):
-        self.position = [self.x, self.y]
-
+        
+        self.width = len(self.representation[0])
+        self.height = len(self.representation)
+    
 class Board():
     def __init__(self):
         self._status = np.array([[0]*10]*24) # Array holding current state of every cell, 1 means there is a block 
@@ -46,17 +46,12 @@ class Board():
         self.elements.append(block)
         block_arr = block.representation
 
-        if block._type != "I":
-            self._status[block.x][block.y:block.y+3] = block_arr[0]
-            self._status[block.x + 1][block.y:block.y+3] = block_arr[1]
-
-        else:
-
-            self._status[block.x][block.y:7] = block_arr[0]
+        for i in range(block.height):
+            self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
 
 
     def move_block_down(self):
-        if (self.elements[-1].x + 1) <= (len(self._status) - len(self.elements[-1].position)): # Assertion from hitting floor
+        if (self.elements[-1].x + self.elements[-1].height) <= (len(self._status) - len(self.elements[-1].position)): # Assertion from hitting floor
             self.clear_elem()
             self.elements[-1].x += 1
             self.refresh_position()
@@ -84,13 +79,8 @@ class Board():
         if block == None:
             block = self.elements[-1]
 
-        if block._type != "I":
-            self._status[block.x][block.y:block.y+3] = 0
-            self._status[block.x + 1][block.y:block.y+3] = 0
-
-        else:
-
-             self._status[block.x][block.y:block.y+4] = 0
+        for i in range(block.height):
+            self._status[block.x +i][block.y:block.y+block.width] = 0
 
 
     def refresh_position(self, block=None, addition=True):
@@ -99,22 +89,13 @@ class Board():
         block_arr = block.representation
 
         if addition:
-            if block._type != "I":
-                self._status[block.x][block.y:block.y+3] += block_arr[0]
-                self._status[block.x + 1][block.y:block.y+3] += block_arr[1]
-
-            else:
-                self._status[block.x][block.y:block.y+4] += block_arr[0]
+            for i in range(block.height):
+                self._status[block.x +i][block.y:block.y+block.width] += block_arr[i]
         else:
-            if block._type != "I":
-                self._status[block.x][block.y:block.y+3] = block_arr[0]
-                self._status[block.x + 1][block.y:block.y+3] = block_arr[1]
+            for i in range(block.height):
+                self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
 
-            else:
-
-                self._status[block.x][block.y:block.y+4] = block_arr[0]
-
-        block.update_position()        
+        block.position = [block.x, block.y]       
 
     def move_left(self):
         self.clear_elem()
@@ -148,4 +129,4 @@ if __name__ == "__main__":
         if not board.move_block_down():
             random_key = choice(list(TETROMINO.keys())) 
             board.spawn_block(Block(random_key))
-        
+            print(board.elements[-1].representation)
