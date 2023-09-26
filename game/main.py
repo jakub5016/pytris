@@ -36,7 +36,15 @@ class Block():
         
         self.width = len(self.representation[0])
         self.height = len(self.representation)
-    
+
+    def rotate(self):
+        to_transpose = self.representation 
+        self.representation  = (np.array(to_transpose).T).tolist()
+
+        self.width = len(self.representation[0])
+        self.height = len(self.representation)
+
+
 class Board():
     def __init__(self):
         self._status = np.array([[0]*10]*24) # Array holding current state of every cell, 1 means there is a block 
@@ -52,8 +60,8 @@ class Board():
 
     def move_block_down(self):
         last_elem = self.elements[-1]
-
-        if (last_elem.x + last_elem.height) <= (len(self._status) - len(last_elem.position)): # Assertion from hitting floor
+        print(last_elem.height)
+        if (last_elem.x + last_elem.height) <= (len(self._status) - last_elem.height): # Assertion from hitting floor
             self.clear_elem()
             self.elements[-1].x += 1
             self.refresh_position()
@@ -127,6 +135,11 @@ if __name__ == "__main__":
         
         elif move == "a":
             board.move_left()
+
+        elif move == "q":
+            board.clear_elem()
+            board.elements[-1].rotate()
+            board.refresh_position()
 
         if not board.move_block_down():
             random_key = choice(list(TETROMINO.keys())) 
