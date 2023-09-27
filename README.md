@@ -5,5 +5,5 @@ Tetris game in python using pygame, suitabe for using RL and other types of mach
 # How to run?
 
 1. Run command ```pip install -r requirements.txt ```
-1. Run ```main.py``` script located in ```game``` folder
+1. Run ```python -m game.visualization.main``` in main folder
 

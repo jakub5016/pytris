@@ -1,5 +1,5 @@
 import pygame
-from vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard
+from .vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard
 
 GAME_WIDTH = 10 * BLOCK_SIZE
 GAME_HEIGHT = 24 * BLOCK_SIZE
