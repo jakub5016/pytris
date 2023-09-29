@@ -1,5 +1,5 @@
 import pygame
-from .vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard
+from .vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard, drawingElement
 
 GAME_WIDTH = 10 * BLOCK_SIZE
 GAME_HEIGHT = 24 * BLOCK_SIZE
@@ -17,17 +17,26 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 clock = pygame.time.Clock()
 
 block = drawingBlock()
+board = drawingBoard()
+board.spawn_block(block=block)
+
+# point = drawingElement()
 
 running = True
 while running:
     screen.fill(BG_COLOR)
-    block.draw(surface=screen, color=COLORS[1])
+    board.elements[-1].draw(surface=screen, color=COLORS[1])
+    # point.draw(surface=screen, color=COLORS[4])
     pygame.display.update()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    clock.tick(100)
+    
+    
+    board.move_block_down()
+    # points.y += 1
+    # point.ref_pos()
+    clock.tick(1)
 
 pygame.quit()
