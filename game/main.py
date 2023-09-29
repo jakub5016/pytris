@@ -118,6 +118,11 @@ class Board():
             self.elements[-1].y += 1
             self.refresh_position()
 
+    def rotate(self):
+        self.clear_elem()
+        self.elements[-1].rotate()
+        self.refresh_position()
+
 if __name__ == "__main__":
     board = Board()
     T_block = Block("I")

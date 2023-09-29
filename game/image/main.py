@@ -35,8 +35,14 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
-    
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                board.move_left()
+            if event.key == pygame.K_RIGHT:
+                board.move_right()
+            # if event.key == pygame.K_UP:
+            #     board.rotate()
+
     if not board.move_block_down():
             random_key = choice(list(TETROMINO.keys())) 
             board.spawn_block(drawingBlock(random_key))
