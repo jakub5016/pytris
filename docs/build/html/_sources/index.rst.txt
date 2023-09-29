@@ -4,17 +4,22 @@
    contain the root `toctree` directive.
 
 Welcome to PyTris's documentation!
-==================================
+++++++++++++++++++++++++++++++++++
+
+What is Pytris?
+---------------
+
+Pytris is an open-source python package that provides you a way to use machine learning on python.
+It contains version with, and without visualization.
+
+Modules
+=======
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-.. automodule:: game.main
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   
+   game
+   img
 
 Indices and tables
 ==================
