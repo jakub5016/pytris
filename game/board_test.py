@@ -1,4 +1,4 @@
-from game.main import Board, Block, TETROMINO
+from .main import Board, Block, TETROMINO
 import numpy as np
 
 def test_spawn():
