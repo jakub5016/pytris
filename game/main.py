@@ -60,7 +60,6 @@ class Board():
 
     def move_block_down(self):
         last_elem = self.elements[-1]
-        print(last_elem.height)
         if (last_elem.x + last_elem.height) <= (len(self._status) - last_elem.height): # Assertion from hitting floor
             self.clear_elem()
             self.elements[-1].x += 1

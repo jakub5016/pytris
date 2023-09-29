@@ -1,7 +1,7 @@
 from pygame import Rect, draw
 from ..main import Board, Block
 
-BLOCK_SIZE = 35
+BLOCK_SIZE = 30
 BORDER_WIDHT = 10
 
 class drawingBlock(Block):
@@ -11,22 +11,29 @@ class drawingBlock(Block):
         
         for i in range(len(self.representation)):
             for j in range(len(self.representation[0])):
-                self.drawing_elements.append(drawingElement(i,j,self))
+                if self.representation[i][j] :
+                    self.drawing_elements.append(drawingElement(i,j,self))
+
+                else:
+                    self.drawing_elements.append(None)
+
 
 
     def draw(self, surface, color):
-        index = 0
-        for i in range(len(self.representation)):
-            for j in range(len(self.representation[0])):
-                self.drawing_elements[index].x = self.y + j
-                self.drawing_elements[index].y = self.x + i
+        table_index = 0
 
-                index += 1
+        for index, i in enumerate(self.representation):
+            for j in range(len(i)):
+                if self.drawing_elements[table_index] != None:
+                    self.drawing_elements[table_index].x = self.y + j
+                    self.drawing_elements[table_index].y = self.x + index
+
+                table_index += 1
 
         for i in self.drawing_elements:
-            i.ref_pos() # Refresh position
-            i.draw(surface, color)
-            pass
+            if i != None:
+                i.ref_pos() # Refresh position
+                i.draw(surface, color)
 
 
 class drawingElement():

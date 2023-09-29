@@ -1,5 +1,7 @@
 import pygame
+from random import choice
 from .vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard, drawingElement
+from ..main import TETROMINO
 
 GAME_WIDTH = 10 * BLOCK_SIZE
 GAME_HEIGHT = 24 * BLOCK_SIZE
@@ -25,7 +27,8 @@ board.spawn_block(block=block)
 running = True
 while running:
     screen.fill(BG_COLOR)
-    board.elements[-1].draw(surface=screen, color=COLORS[1])
+    for i in board.elements:
+        i.draw(surface=screen, color=COLORS[1])
     # point.draw(surface=screen, color=COLORS[4])
     pygame.display.update()
 
@@ -34,9 +37,10 @@ while running:
             running = False
     
     
-    board.move_block_down()
-    # points.y += 1
-    # point.ref_pos()
-    clock.tick(1)
+    if not board.move_block_down():
+            random_key = choice(list(TETROMINO.keys())) 
+            board.spawn_block(drawingBlock(random_key))
+
+    clock.tick(10)
 
 pygame.quit()
