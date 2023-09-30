@@ -18,7 +18,8 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Game documentation" href="game.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,28 +41,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to PyTris’s documentation!</a><ul>
-<li><a class="reference internal" href="#game.main.Block"><code class="docutils literal notranslate"><span class="pre">Block</span></code></a><ul>
-<li><a class="reference internal" href="#game.main.Block.rotate"><code class="docutils literal notranslate"><span class="pre">Block.rotate()</span></code></a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="img.html">Visualization documentation</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#game.main.Board"><code class="docutils literal notranslate"><span class="pre">Board</span></code></a><ul>
-<li><a class="reference internal" href="#game.main.Board.clear_elem"><code class="docutils literal notranslate"><span class="pre">Board.clear_elem()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.move_block_down"><code class="docutils literal notranslate"><span class="pre">Board.move_block_down()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.move_left"><code class="docutils literal notranslate"><span class="pre">Board.move_left()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.move_right"><code class="docutils literal notranslate"><span class="pre">Board.move_right()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.refresh_position"><code class="docutils literal notranslate"><span class="pre">Board.refresh_position()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.rotate"><code class="docutils literal notranslate"><span class="pre">Board.rotate()</span></code></a></li>
-<li><a class="reference internal" href="#game.main.Board.spawn_block"><code class="docutils literal notranslate"><span class="pre">Board.spawn_block()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -88,76 +72,43 @@
              
   <section id="welcome-to-pytris-s-documentation">
 <h1>Welcome to PyTris’s documentation!<a class="headerlink" href="#welcome-to-pytris-s-documentation" title="Link to this heading"></a></h1>
+<section id="what-is-pytris">
+<h2>What is Pytris?<a class="headerlink" href="#what-is-pytris" title="Link to this heading"></a></h2>
+<p>Pytris is an open-source python package that provides you a way to use machine learning on python.
+It contains version with, and without visualization.</p>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h3>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="game.html#game.main.Block"><code class="docutils literal notranslate"><span class="pre">Block</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="game.html#game.main.Board"><code class="docutils literal notranslate"><span class="pre">Board</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="img.html">Visualization documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="img.html#module-game.image.vis_classes">vis_classes</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<dl class="py class" id="module-game.main">
-<dt class="sig sig-object py" id="game.main.Block">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">game.main.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'I'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Block" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Definition for blocks used in game. All of the blocks are represented by Tetromino.</p>
-<p>type - this variable is used to define type of the block used</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Block.rotate">
-<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Block.rotate" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="game.main.Board">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">game.main.</span></span><span class="sig-name descname"><span class="pre">Board</span></span><a class="headerlink" href="#game.main.Board" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.clear_elem">
-<span class="sig-name descname"><span class="pre">clear_elem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.clear_elem" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.move_block_down">
-<span class="sig-name descname"><span class="pre">move_block_down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.move_block_down" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.move_left">
-<span class="sig-name descname"><span class="pre">move_left</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.move_left" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.move_right">
-<span class="sig-name descname"><span class="pre">move_right</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.move_right" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.refresh_position">
-<span class="sig-name descname"><span class="pre">refresh_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.refresh_position" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.rotate">
-<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.rotate" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="game.main.Board.spawn_block">
-<span class="sig-name descname"><span class="pre">spawn_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#game.main.Board.spawn_block" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="game.html" class="btn btn-neutral float-right" title="Game documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
