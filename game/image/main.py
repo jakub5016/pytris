@@ -5,7 +5,7 @@ from ..main import TETROMINO
 
 GAME_WIDTH = 10 * BLOCK_SIZE
 GAME_HEIGHT = 24 * BLOCK_SIZE
-MENU_WIDHT = 100
+MENU_WIDHT = 150
 
 SIZE = WINDTH, HEIGHT = GAME_WIDTH + MENU_WIDHT, GAME_HEIGHT
 COLORS = [(38, 70, 83), (42, 157, 143), (233, 196, 106), (244, 162, 97), (231, 111, 81)]
@@ -17,6 +17,7 @@ pygame.display.set_caption('PyTris')
 screen = pygame.display.set_mode((WINDTH, HEIGHT))
 font = pygame.font.Font('freesansbold.ttf', 32)
 clock = pygame.time.Clock()
+border_rect = pygame.Rect(GAME_WIDTH, 0, BLOCK_SIZE, GAME_HEIGHT)
 
 block = drawingBlock()
 board = drawingBoard()
@@ -27,9 +28,9 @@ board.spawn_block(block=block)
 running = True
 while running:
     screen.fill(BG_COLOR)
+    pygame.draw.rect(screen,COLORS[0],border_rect)
     for i in board.elements:
         i.draw(surface=screen, color=COLORS[1])
-    # point.draw(surface=screen, color=COLORS[4])
     pygame.display.update()
 
     for event in pygame.event.get():
