@@ -59,6 +59,9 @@ class Board():
         self._status = np.array([[0]*10]*24) # Array holding current state of every cell, 1 means there is a block 
         self.elements = []
     
+    def calculate_score(self):
+        return np.sum(self._status)
+
     def spawn_block(self, block):
         self.elements.append(block)
         block_arr = block.representation
