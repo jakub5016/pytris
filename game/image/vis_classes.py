@@ -7,17 +7,7 @@ BORDER_WIDHT = 10
 class drawingBlock(Block):
     def __init__(self, type="I"):
         super().__init__(type)
-        self.drawing_elements = []
-        
-        for i in range(len(self.representation)):
-            for j in range(len(self.representation[0])):
-                if self.representation[i][j] :
-                    self.drawing_elements.append(drawingElement(i,j,self))
-
-                else:
-                    self.drawing_elements.append(None)
-
-
+        self.create_representation()
 
     def draw(self, surface, color):
         table_index = 0
@@ -35,6 +25,24 @@ class drawingBlock(Block):
                 i.ref_pos() # Refresh position
                 i.draw(surface, color)
 
+    def create_representation(self):
+        self.drawing_elements = []
+
+        for i in range(len(self.representation)):
+            for j in range(len(self.representation[0])):
+                if self.representation[i][j] :
+                    self.drawing_elements.append(drawingElement(i,j,self))
+
+                else:
+                    self.drawing_elements.append(None)
+
+    def rotate(self):
+        """
+        After rotating a bock you change a representation.
+        So you MUST create representation once again
+        """
+        super().rotate()
+        self.create_representation()
 
 class drawingElement():
     def __init__(self, x=0, y =0, block = Block()):

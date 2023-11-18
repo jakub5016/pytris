@@ -49,7 +49,7 @@ def test_move_left():
 
     assert correct and T_block.position == [1,2]
 
-def test_move_left():
+def test_move_right():
     board = Board()
     T_block = Block("T")
     board.spawn_block(T_block)
@@ -72,3 +72,23 @@ def test_move_left():
     board.move_right()
 
     assert correct and T_block.position == [1,7]
+
+
+def test_colision():
+    board = Board()
+    block_1 = Block(type="I")
+    block_1.position = [23, 0]
+    block_1.x = 23
+    block_1.y = 0
+
+    block_2 = Block(type="T")
+    block_2.position = [21, 4]
+    block_2.x = 21
+    block_2.y = 4
+
+
+
+    board.spawn_block(block_1)
+    board.spawn_block(block_2)
+
+    assert board.move_block_down()

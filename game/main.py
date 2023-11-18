@@ -2,6 +2,13 @@ import numpy as np
 import os
 from random import choice
 
+try:
+    LOG_FILE = open("./log/colision_log.txt", "w")
+    LOG_FILE.write("EVERY COLLISION FOR LAST GAME PLAYED\n")
+finally:
+    pass # Some handle for not able to achive log file
+
+
 TETROMINO = {"I": [[0,0,0,0],[1,1,1,1]], 
              "J": [[1,0,0,0],[1,1,1,0]],
              "L": [[0,0,1,0],[1,1,1,0]],
@@ -72,16 +79,23 @@ class Board():
 
     def move_block_down(self):
         last_elem = self.elements[-1]
-        if (last_elem.x + last_elem.height) <= (len(self._status) - last_elem.height): # Assertion from hitting floor
+        if (last_elem.x + last_elem.height) <= (len(self._status) -1): # Assertion from hitting floor
             self.clear_elem()
             self.elements[-1].x += 1
             self.refresh_position()
 
             is_touched=False
+
             for i in self._status:
                 for j in i:
                     if j >= 2:
-                        is_touched=True
+                        is_touched=True # After colision try to write it to logs
+                        try:
+                            LOG_FILE.write("\n---------------------------------------------\n")
+                            LOG_FILE.write(str(self._status))
+                        finally:
+                            pass # Some handle for not able to achive log file
+                        
                         self.clear_elem()
                         self.elements[-1].x -= 1
                         self.refresh_position()
