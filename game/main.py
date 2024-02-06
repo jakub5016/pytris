@@ -81,6 +81,7 @@ class Board():
         last_elem = self.elements[-1]
         if (last_elem.x + last_elem.height) <= (len(self._status) -1): # Assertion from hitting floor
             self.clear_elem()
+            # print(self._status)
             self.elements[-1].x += 1
             self.refresh_position()
 
@@ -120,7 +121,11 @@ class Board():
             block = self.elements[-1]
 
         for i in range(block.height):
-            self._status[block.x +i][block.y:block.y+block.width] = 0
+            for j in range(block.width):
+                if block.representation[i][j] == 1:
+                    self._status[block.x +i][block.y +j] = 0
+
+
 
 
     def refresh_position(self, block=None, addition=True):
@@ -138,7 +143,8 @@ class Board():
 
         if addition:
             for i in range(block.height):
-                self._status[block.x +i][block.y:block.y+block.width] += block_arr[i]
+                for j in range(block.width):
+                    self._status[block.x +i][block.y + j] += block_arr[i][j]
         else:
             for i in range(block.height):
                 self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
@@ -172,6 +178,11 @@ if __name__ == "__main__":
         move = input()
 
         os.system('clear') # Fix later, works only for Linux 
+        
+        if not board.move_block_down():
+            random_key = choice(list(TETROMINO.keys())) 
+            board.spawn_block(Block(random_key))
+            print(board.elements[-1].representation)
 
         if move == "d":
             board.move_right()
@@ -183,8 +194,3 @@ if __name__ == "__main__":
             board.clear_elem()
             board.elements[-1].rotate()
             board.refresh_position()
-
-        if not board.move_block_down():
-            random_key = choice(list(TETROMINO.keys())) 
-            board.spawn_block(Block(random_key))
-            print(board.elements[-1].representation)
