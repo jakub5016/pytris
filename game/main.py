@@ -29,9 +29,10 @@ class Block():
         # We are using the smallest type of representation as we can, so in "I" type of block
         # we simply use only one dimensional array.
         # Also we want to shrik the array for 2x3 type of blocks. 
-        if type != "I":
+        if type != "I" and type != "O":
             self.representation =[np.array(TETROMINO[type][0][0:3]), np.array(TETROMINO[type][1][0:3])]
-
+        elif type == "O":
+            self.representation =[np.array(TETROMINO[type][0][1:3]), np.array(TETROMINO[type][1][1:3])]
         else:
             self.representation = [np.array(TETROMINO[type][1])]
 
@@ -156,7 +157,7 @@ class Board():
         if (self.elements[-1].y - 1) >= 0:  # Assertion from hitting wall
             self.elements[-1].y -= 1
             self.refresh_position()
-        
+        print(self.elements[-1].representation)
     def move_right(self):
         self.clear_elem()
         if (self.elements[-1].y + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])):  # Assertion from hitting wall

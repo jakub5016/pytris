@@ -58,6 +58,6 @@ while running:
             random_key = choice(list(TETROMINO.keys())) 
             board.spawn_block(drawingBlock(random_key))
 
-    clock.tick(10)
+    clock.tick(5)
 
 pygame.quit()
