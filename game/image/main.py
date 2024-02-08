@@ -2,6 +2,7 @@ import pygame
 from random import choice
 from .vis_classes import BLOCK_SIZE, drawingBlock, drawingBoard, drawingElement
 from ..main import TETROMINO
+import time
 
 GAME_WIDTH = 10 * BLOCK_SIZE
 GAME_HEIGHT = 24 * BLOCK_SIZE
@@ -55,9 +56,19 @@ while running:
                 board.rotate()
 
     if not board.move_block_down():
+            if board.elements[-1].x == 0:
+                break
             random_key = choice(list(TETROMINO.keys())) 
             board.spawn_block(drawingBlock(random_key))
 
     clock.tick(5)
 
+
+font = pygame.font.Font('freesansbold.ttf', int(GAME_WIDTH/8))
+score = font.render(f'You Lose Score: {board.calculate_score()}', True, COLORS[4])
+score_rect = score.get_rect()
+score_rect.center = ((GAME_WIDTH+MENU_WIDHT)/2, GAME_HEIGHT/2)
+screen.blit(score, score_rect)
+pygame.display.update()
+time.sleep(5)
 pygame.quit()
