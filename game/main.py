@@ -141,16 +141,18 @@ class Board():
             block = self.elements[-1]
         
         block_arr = block.representation
+        try:    
+            if addition:
+                for i in range(block.height):
+                    for j in range(block.width):
+                        self._status[block.x +i][block.y + j] += block_arr[i][j]
+            else:
+                for i in range(block.height):
+                    self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
 
-        if addition:
-            for i in range(block.height):
-                for j in range(block.width):
-                    self._status[block.x +i][block.y + j] += block_arr[i][j]
-        else:
-            for i in range(block.height):
-                self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
-
-        block.position = [block.x, block.y]       
+            block.position = [block.x, block.y]       
+        except:
+            return 1 # Cannot rotate
 
     def move_left(self):
         self.clear_elem()
@@ -167,7 +169,8 @@ class Board():
     def rotate(self):
         self.clear_elem()
         self.elements[-1].rotate()
-        self.refresh_position()
+        if (self.refresh_position()): #Caanot rotate, try again to not hit wall
+            self.elements[-1].rotate()
 
 if __name__ == "__main__":
     board = Board()
