@@ -29,9 +29,10 @@ class Block():
         # We are using the smallest type of representation as we can, so in "I" type of block
         # we simply use only one dimensional array.
         # Also we want to shrik the array for 2x3 type of blocks. 
-        if type != "I":
+        if type != "I" and type != "O":
             self.representation =[np.array(TETROMINO[type][0][0:3]), np.array(TETROMINO[type][1][0:3])]
-
+        elif type == "O":
+            self.representation =[np.array(TETROMINO[type][0][1:3]), np.array(TETROMINO[type][1][1:3])]
         else:
             self.representation = [np.array(TETROMINO[type][1])]
 
@@ -81,6 +82,7 @@ class Board():
         last_elem = self.elements[-1]
         if (last_elem.x + last_elem.height) <= (len(self._status) -1): # Assertion from hitting floor
             self.clear_elem()
+            # print(self._status)
             self.elements[-1].x += 1
             self.refresh_position()
 
@@ -120,7 +122,11 @@ class Board():
             block = self.elements[-1]
 
         for i in range(block.height):
-            self._status[block.x +i][block.y:block.y+block.width] = 0
+            for j in range(block.width):
+                if block.representation[i][j] == 1:
+                    self._status[block.x +i][block.y +j] = 0
+
+
 
 
     def refresh_position(self, block=None, addition=True):
@@ -135,22 +141,25 @@ class Board():
             block = self.elements[-1]
         
         block_arr = block.representation
+        try:    
+            if addition:
+                for i in range(block.height):
+                    for j in range(block.width):
+                        self._status[block.x +i][block.y + j] += block_arr[i][j]
+            else:
+                for i in range(block.height):
+                    self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
 
-        if addition:
-            for i in range(block.height):
-                self._status[block.x +i][block.y:block.y+block.width] += block_arr[i]
-        else:
-            for i in range(block.height):
-                self._status[block.x +i][block.y:block.y+block.width] = block_arr[i]
-
-        block.position = [block.x, block.y]       
+            block.position = [block.x, block.y]       
+        except:
+            return 1 # Cannot rotate
 
     def move_left(self):
         self.clear_elem()
         if (self.elements[-1].y - 1) >= 0:  # Assertion from hitting wall
             self.elements[-1].y -= 1
             self.refresh_position()
-        
+        print(self.elements[-1].representation)
     def move_right(self):
         self.clear_elem()
         if (self.elements[-1].y + 1) <= (len(self._status[0]) - len(self.elements[-1].representation[0])):  # Assertion from hitting wall
@@ -160,7 +169,8 @@ class Board():
     def rotate(self):
         self.clear_elem()
         self.elements[-1].rotate()
-        self.refresh_position()
+        if (self.refresh_position()): #Caanot rotate, try again to not hit wall
+            self.elements[-1].rotate()
 
 if __name__ == "__main__":
     board = Board()
@@ -172,6 +182,11 @@ if __name__ == "__main__":
         move = input()
 
         os.system('clear') # Fix later, works only for Linux 
+        
+        if not board.move_block_down():
+            random_key = choice(list(TETROMINO.keys())) 
+            board.spawn_block(Block(random_key))
+            print(board.elements[-1].representation)
 
         if move == "d":
             board.move_right()
@@ -183,8 +198,3 @@ if __name__ == "__main__":
             board.clear_elem()
             board.elements[-1].rotate()
             board.refresh_position()
-
-        if not board.move_block_down():
-            random_key = choice(list(TETROMINO.keys())) 
-            board.spawn_block(Block(random_key))
-            print(board.elements[-1].representation)
